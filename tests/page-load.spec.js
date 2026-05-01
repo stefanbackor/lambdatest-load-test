@@ -3,14 +3,14 @@ const { test, expect } = require("@playwright/test");
 const fs = require("fs");
 const path = require("path");
 
-const TARGET_URL = "https://www.bajajfinserv.in/live";
+const TARGET_URL = "https://fw.tv/embed-feed.html";
 const LOAD_BUDGET_MS = Number(process.env.LOAD_BUDGET_MS || 8000);
 const DOMCONTENTLOADED_BUDGET_MS = Number(process.env.DOM_BUDGET_MS || 5000);
 
 const REPORTS_DIR = path.resolve(__dirname, "..", "reports");
 if (!fs.existsSync(REPORTS_DIR)) fs.mkdirSync(REPORTS_DIR, { recursive: true });
 
-test.describe("bajajfinserv.in/live — page load", () => {
+test.describe("fw.tv/embed-feed — page load", () => {
   test("loads within budget and reports navigation timings", async ({
     page,
   }, testInfo) => {

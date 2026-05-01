@@ -13,7 +13,7 @@ module.exports = defineConfig({
     ['json', { outputFile: 'reports/results.json' }],
   ],
   use: {
-    baseURL: 'https://www.bajajfinserv.in',
+    baseURL: 'https://fw.tv',
     headless: true,
     ignoreHTTPSErrors: true,
     navigationTimeout: 90 * 1000,

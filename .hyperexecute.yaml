@@ -46,4 +46,4 @@ artifacts:
       - test-results/**
 
 jobLabel:
-  - bajajfinserv-page-load
+  - fw-tv-embed-feed-page-load
