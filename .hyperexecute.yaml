@@ -1,0 +1,49 @@
+---
+version: 0.2
+runson: linux
+concurrency: 2
+retryOnFailure: true
+maxRetries: 1
+
+autosplit: true
+testRunnerCommand: npx playwright test --reporter=list --project=chromium $test
+
+testDiscovery:
+  type: raw
+  mode: static
+  command: grep -rEl "test\(|test\.describe\(" tests/ | sed 's|^|./|'
+
+pre:
+  - npm ci || npm install
+  - npx playwright install --with-deps chromium
+
+post:
+  - cat reports/results.json || true
+
+env:
+  LT_USERNAME: ${LT_USERNAME}
+  LT_ACCESS_KEY: ${LT_ACCESS_KEY}
+  LOAD_BUDGET_MS: "8000"
+  DOM_BUDGET_MS: "5000"
+  PLAYWRIGHT_HTML_OPEN: never
+
+cacheKey: '{{ checksum "package.json" }}'
+cacheDirectories:
+  - node_modules
+  - ~/.cache/ms-playwright
+
+report: true
+partialReports:
+  location: playwright-report
+  type: html
+  frameworkName: playwright
+
+artifacts:
+  - name: playwright-report
+    path:
+      - playwright-report/**
+      - reports/**
+      - test-results/**
+
+jobLabel:
+  - bajajfinserv-page-load
